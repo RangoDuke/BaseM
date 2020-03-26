@@ -69,11 +69,10 @@ export default {
   /**
    * Use V5 keys.
    * Note: not all OpenPGP implementations are compatible with this option.
-   * **FUTURE OPENPGP.JS VERSIONS MAY BREAK COMPATIBILITY WHEN USING THIS OPTION**
    * @memberof module:config
    * @property {Boolean} v5Keys
    */
-  v5Keys: false,
+  v5Keys: true,
   /**
    * {@link https://tools.ietf.org/html/rfc4880#section-3.7.1.3|RFC4880 3.7.1.3}:
    * Iteration Count Byte for S2K (String to Key)
