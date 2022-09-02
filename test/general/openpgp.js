@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-/* globals tryTests: true, loadStreamsPolyfill */
+/* globals tryTests, loadStreamsPolyfill */
 
 const openpgp = typeof window !== 'undefined' && window.openpgp ? window.openpgp : require('../..');
 const crypto = require('../../src/crypto');
