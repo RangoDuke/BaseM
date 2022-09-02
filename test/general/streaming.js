@@ -1,4 +1,5 @@
 /* eslint-disable max-lines */
+/* globals loadStreamsPolyfill */
 
 const openpgp = typeof window !== 'undefined' && window.openpgp ? window.openpgp : require('../..');
 const random = require('../../src/crypto/random');
@@ -426,7 +427,7 @@ function tests() {
       expect(stream.isStream(encrypted)).to.equal(expectedType);
 
       const message = await openpgp.readMessage({
-        armoredMessage: stream[expectedType === 'node' ? 'webToNode' : global.ReadableStream === stream.ReadableStream ? 'toStream' : 'toNativeReadable'](stream.transform(encrypted, value => {
+        armoredMessage: stream[expectedType === 'node' ? 'webToNode' : 'toStream'](stream.transform(encrypted, value => {
           value += '';
           if (value === '=' || value.length === 5) return; // Remove checksum
           const newlineIndex = value.indexOf('\n', 500);
@@ -464,7 +465,7 @@ function tests() {
       expect(stream.isStream(encrypted)).to.equal(expectedType);
 
       const message = await openpgp.readMessage({
-        armoredMessage: stream[expectedType === 'node' ? 'webToNode' : global.ReadableStream === stream.ReadableStream ? 'toStream' : 'toNativeReadable'](stream.transform(encrypted, value => {
+        armoredMessage: stream[expectedType === 'node' ? 'webToNode' : 'toStream'](stream.transform(encrypted, value => {
           value += '';
           const newlineIndex = value.indexOf('\n', 500);
           if (value.length > 1000) return value.slice(0, newlineIndex - 1) + (value[newlineIndex - 1] === 'a' ? 'b' : 'a') + value.slice(newlineIndex);
@@ -501,7 +502,7 @@ function tests() {
       expect(stream.isStream(encrypted)).to.equal(expectedType);
 
       const message = await openpgp.readMessage({
-        armoredMessage: stream[expectedType === 'node' ? 'webToNode' : global.ReadableStream === stream.ReadableStream ? 'toStream' : 'toNativeReadable'](stream.transform(encrypted, value => {
+        armoredMessage: stream[expectedType === 'node' ? 'webToNode' : 'toStream'](stream.transform(encrypted, value => {
           value += '';
           const newlineIndex = value.indexOf('\n', 500);
           if (value.length > 1000) return value.slice(0, newlineIndex - 1) + (value[newlineIndex - 1] === 'a' ? 'b' : 'a') + value.slice(newlineIndex);
@@ -534,7 +535,7 @@ function tests() {
     expect(stream.isStream(signed)).to.equal(expectedType);
 
     const message = await openpgp.readMessage({
-      armoredMessage: stream[expectedType === 'node' ? 'webToNode' : global.ReadableStream === stream.ReadableStream ? 'toStream' : 'toNativeReadable'](stream.transform(signed, value => {
+      armoredMessage: stream[expectedType === 'node' ? 'webToNode' : 'toStream'](stream.transform(signed, value => {
         value += '';
         const newlineIndex = value.indexOf('\n', 500);
         if (value.length > 1000) return value.slice(0, newlineIndex - 1) + (value[newlineIndex - 1] === 'a' ? 'b' : 'a') + value.slice(newlineIndex);
@@ -959,7 +960,7 @@ module.exports = () => describe('Streaming', function() {
       passphrase: 'hello world'
     });
 
-    await stream.loadStreamsPonyfill();
+    loadStreamsPolyfill();
   });
 
   beforeEach(function() {

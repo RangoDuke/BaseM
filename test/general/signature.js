@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-/* globals tryTests: true */
+/* globals tryTests: true, loadStreamsPolyfill */
 
 const openpgp = typeof window !== 'undefined' && window.openpgp ? window.openpgp : require('../..');
 const util = require('../../src/util');
@@ -903,7 +903,7 @@ AkLaG/AkATpuH+DMkYDmKbDLGgD+N4yuxXBJmBfC2IBe4J1S2Gg=
       date: key.keyPacket.created,
       format: 'object'
     });
-    await stream.loadStreamsPonyfill();
+    loadStreamsPolyfill();
     const { signatures: [sigInfo] } = await openpgp.verify({
       verificationKeys: expiredKey,
       message: await openpgp.readMessage({ armoredMessage: stream.toStream(armoredMessage) }),
@@ -934,7 +934,7 @@ aMsUdQBgnPAcSGVsbG8gV29ybGQgOik=
       date: key.keyPacket.created,
       format: 'object'
     });
-    await stream.loadStreamsPonyfill();
+    loadStreamsPolyfill();
     const { signatures: [sigInfo] } = await openpgp.verify({
       verificationKeys: expiredKey,
       message: await openpgp.readMessage({ armoredMessage: stream.toStream(armoredMessage) }),
@@ -964,7 +964,7 @@ eSvSZutLuKKbidSYMLhWROPlwKc2GU2ws6PrLZAyCAel/lU=
       date: key.keyPacket.created,
       format: 'object'
     });
-    await stream.loadStreamsPonyfill();
+    loadStreamsPolyfill();
     const { signatures: [sigInfo] } = await openpgp.verify({
       verificationKeys: expiredKey,
       message: await openpgp.readMessage({ armoredMessage: stream.toStream(armoredMessage) }),
@@ -1375,9 +1375,9 @@ yYDnCgA=
 -----END PGP MESSAGE-----`.split('');
 
       const plaintext = 'space: \nspace and tab: \t\nno trailing space\n  \ntab:\t\ntab and space:\t ';
-      await stream.loadStreamsPonyfill();
+      loadStreamsPolyfill();
       const message = await openpgp.readMessage({
-        armoredMessage: new stream.ReadableStream({
+        armoredMessage: new ReadableStream({
           async pull(controller) {
             await new Promise(setTimeout);
             controller.enqueue(armoredMessage.shift());
@@ -1441,9 +1441,9 @@ hkJiXopCSWKSlQInL1devkJJUWJmTmZeugJYlpdLAagQJM0JpsCqIQZwKgAA
 -----END PGP MESSAGE-----`.split('');
 
       const plaintext = 'space: \nspace and tab: \t\nno trailing space\n  \ntab:\t\ntab and space:\t ';
-      await stream.loadStreamsPonyfill();
+      loadStreamsPolyfill();
       const message = await openpgp.readMessage({
-        armoredMessage: new stream.ReadableStream({
+        armoredMessage: new ReadableStream({
           async pull(controller) {
             await new Promise(setTimeout);
             controller.enqueue(armoredMessage.shift());
