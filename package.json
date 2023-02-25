@@ -1,9 +1,9 @@
 {
-  "name": "openpgp",
+  "name": "pgp",
   "description": "OpenPGP.js is a Javascript implementation of the OpenPGP protocol. This is defined in RFC 4880.",
-  "version": "5.7.0",
-  "license": "LGPL-3.0+",
-  "homepage": "https://openpgpjs.org/",
+  "version": "1.0",
+  "license": "",
+  "homepage": "",
   "engines": {
     "node": ">= 8.0.0"
   },
